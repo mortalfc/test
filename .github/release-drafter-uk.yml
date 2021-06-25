@@ -1,6 +1,7 @@
 name-template: 'uk-v$RESOLVED_VERSION 🌈'
 tag-template: 'uk-v$RESOLVED_VERSION'
 filter-by-commitish: true
+commitish: uk
 categories:
   - title: '🚀 Features'
     labels:
@@ -15,7 +16,6 @@ categories:
     label: 'chore'
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
-commitish: uk
 version-resolver:
   major:
     labels:
