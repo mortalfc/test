@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - '**'
+  create
 
 jobs:
   test-job:
@@ -32,12 +33,8 @@ jobs:
         with:
           config-name: release-drafter-us.yml
 
-      - name: Pull backend repo develop
-        uses: actions/checkout@v2
-        with:
-          ref: uk
-
       - name: Create new release UK
+        if: endsWith(github.ref, '/uk')
         id: create_release-uk
         uses: release-drafter/release-drafter@master
         env:
