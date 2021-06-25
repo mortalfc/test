@@ -15,14 +15,10 @@ jobs:
       DOCKER_BUILDKIT: 1
 
     steps:
-      - name: Get repo
-        uses: actions/checkout@v2
-
-      - uses: peterjgrainger/action-create-branch@v2.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          branch: uk
+      - uses: zofrex/mirror-branch@v1
+      with:
+        target-branch: uk
+        force: true
       # - name: Create UK branch
       #   if: endsWith(github.ref, '/main')
       #   uses: peterjgrainger/action-create-branch@v2.0.1
