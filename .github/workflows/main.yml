@@ -3,9 +3,6 @@ on:
   push:
     branches:
       - '**'
-  create:
-    branches:
-      - 'uk'
 
 jobs:
   test-job:
@@ -15,6 +12,9 @@ jobs:
       DOCKER_BUILDKIT: 1
 
     steps:
+      - name: Get repo
+        uses: actions/checkout@v2
+
       - name: Create UK branch
         if: endsWith(github.ref, '/main')
         uses: peterjgrainger/action-create-branch@v2.0.1
