@@ -1,0 +1,38 @@
+name: Check branch
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_TAG: tuune/backend
+      DOCKER_BUILDKIT: 1
+
+    steps:
+      - name: Create UK branch
+        uses: peterjgrainger/action-create-branch@v2.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: uk
+
+      - name: Create new release UK
+        id: create_release-uk
+        uses: release-drafter/release-drafter@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          config-name: release-drafter-uk.yml
+
+      - name: Create new release US
+        id: create_release-us
+        uses: release-drafter/release-drafter@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          config-name: release-drafter-us.yml
+      - name: Check out repo
+        uses: actions/checkout@v2
