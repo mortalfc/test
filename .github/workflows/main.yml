@@ -20,6 +20,7 @@ jobs:
       #     branch: uk
 
       - name: Create new release UK
+        if: endsWith(github.ref, '/uk')
         id: create_release-uk
         uses: release-drafter/release-drafter@master
         env:
