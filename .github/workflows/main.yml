@@ -3,7 +3,9 @@ on:
   push:
     branches:
       - '**'
-  create
+  create:
+    branches:
+      - '**'
 
 jobs:
   test-job:
@@ -13,10 +15,13 @@ jobs:
       DOCKER_BUILDKIT: 1
 
     steps:
-      - uses: zofrex/mirror-branch@v1
-        with:
-          target-branch: uk
-          force: true
+       - name: Pull backend repo develop
+        if: endsWith(github.ref, '/main')
+         uses: actions/checkout@v2
+
+      - name: Push branch
+        if: endsWith(github.ref, '/main')
+        run: git push origin main:uk -f
       # - name: Create UK branch
       #   if: endsWith(github.ref, '/main')
       #   uses: peterjgrainger/action-create-branch@v2.0.1
