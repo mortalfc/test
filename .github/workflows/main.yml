@@ -15,13 +15,18 @@ jobs:
       - name: Get repo
         uses: actions/checkout@v2
 
-      - name: Create UK branch
-        if: endsWith(github.ref, '/main')
-        uses: peterjgrainger/action-create-branch@v2.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: uk
+      # - name: Create UK branch
+      #   if: endsWith(github.ref, '/main')
+      #   uses: peterjgrainger/action-create-branch@v2.0.1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     branch: uk
 
       - name: Create new release UK
         if: endsWith(github.ref, '/uk')
