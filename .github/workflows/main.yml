@@ -15,9 +15,9 @@ jobs:
       DOCKER_BUILDKIT: 1
 
     steps:
-       - name: Pull backend repo develop
+      - name: Pull backend repo develop
         if: endsWith(github.ref, '/main')
-         uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Push branch
         if: endsWith(github.ref, '/main')
