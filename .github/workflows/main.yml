@@ -16,9 +16,9 @@ jobs:
 
     steps:
       - uses: zofrex/mirror-branch@v1
-      with:
-        target-branch: uk
-        force: true
+        with:
+          target-branch: uk
+          force: true
       # - name: Create UK branch
       #   if: endsWith(github.ref, '/main')
       #   uses: peterjgrainger/action-create-branch@v2.0.1
