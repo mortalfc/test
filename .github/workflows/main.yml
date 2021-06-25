@@ -3,9 +3,6 @@ on:
   push:
     branches:
       - '**'
-  create:
-    branches:
-      - '**'
 
 jobs:
   test-job:
@@ -26,6 +23,19 @@ jobs:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #   with:
       #     branch: uk
+      - name: Create new release US
+        if: endsWith(github.ref, '/main')
+        id: create_release-us
+        uses: release-drafter/release-drafter@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          config-name: release-drafter-us.yml
+
+      - name: Pull backend repo develop
+        uses: actions/checkout@v2
+        with:
+          ref: uk
 
       - name: Create new release UK
         if: endsWith(github.ref, '/uk')
@@ -35,12 +45,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           config-name: release-drafter-uk.yml
-
-      - name: Create new release US
-        if: endsWith(github.ref, '/main')
-        id: create_release-us
-        uses: release-drafter/release-drafter@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          config-name: release-drafter-us.yml
