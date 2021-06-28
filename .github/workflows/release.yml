@@ -1,0 +1,13 @@
+name: Deploy Release
+on:
+  release:
+    types: [published]
+
+jobs:
+  test-job:
+  runs-on: ubuntu-latest
+  if: startsWith(github.ref, 'refs/tags/uk-v')
+
+  steps:
+    - name: Hello
+      run: printenv
