@@ -5,9 +5,9 @@ on:
 
 jobs:
   test-job:
-  runs-on: ubuntu-latest
-  if: startsWith(github.ref, 'refs/tags/uk-v')
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/uk-v')
 
-  steps:
-    - name: Hello
-      run: printenv
+    steps:
+      - name: Hello
+        run: printenv
